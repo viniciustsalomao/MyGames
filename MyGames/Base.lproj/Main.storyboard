@@ -11,13 +11,18 @@
         <!--Lista de jogos-->
         <scene sceneID="Hyh-3k-eBq">
             <objects>
-                <tableViewController id="hgv-an-JTO" sceneMemberID="viewController">
+                <tableViewController id="hgv-an-JTO" customClass="GamesTableViewController" customModule="MyGames" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaW-GF-php">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="ech-hH-Tcj">
+                            <rect key="frame" x="0.0" y="146" width="414" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="90" id="ewt-TH-pcM">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="90" id="ewt-TH-pcM" customClass="GameTableViewCell" customModule="MyGames" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ewt-TH-pcM" id="0eK-UW-sGY">
@@ -60,7 +65,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="0QD-dp-3gg" kind="show" id="YaG-8x-Tmd"/>
+                                    <outlet property="ivCover" destination="zyk-3Q-c7n" id="4F5-2P-y94"/>
+                                    <outlet property="lbConsole" destination="gMA-eY-tRX" id="fK8-oh-h3c"/>
+                                    <outlet property="lbTitle" destination="ENc-tS-pOO" id="xOz-fp-Efd"/>
+                                    <segue destination="0QD-dp-3gg" kind="show" identifier="gameSegue" id="YaG-8x-Tmd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -69,16 +77,22 @@
                             <outlet property="delegate" destination="hgv-an-JTO" id="xhT-H7-xdw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lista de jogos" largeTitleDisplayMode="always" id="uOz-PS-VgC"/>
+                    <navigationItem key="navigationItem" title="Lista de jogos" largeTitleDisplayMode="never" id="uOz-PS-VgC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="E2j-I2-wbM">
+                            <connections>
+                                <segue destination="5e9-fn-pgm" kind="show" identifier="newGameSegue" id="9Zw-XA-sVl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIt-E4-DCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1195.6521739130435" y="168.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="QGr-J2-feh">
             <objects>
-                <viewController id="0QD-dp-3gg" sceneMemberID="viewController">
+                <viewController id="0QD-dp-3gg" customClass="GameViewController" customModule="MyGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E80-sP-KQj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,7 +109,7 @@
                                 <color key="textColor" name="main"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="4Od-Jy-nTY">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4Od-Jy-nTY">
                                 <rect key="frame" x="16" y="201.5" width="382" height="591.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ano de lançamento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9g-QP-Vsg">
@@ -130,15 +144,21 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ivCover" destination="4Od-Jy-nTY" id="yDM-Co-448"/>
+                        <outlet property="lbConsole" destination="mY5-4a-ROq" id="TbE-E7-hda"/>
+                        <outlet property="lbReleasedate" destination="P9g-QP-Vsg" id="cQC-Nx-dXA"/>
+                        <outlet property="lbTitle" destination="2BA-vE-M55" id="dQK-Kl-SIU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9O-4Z-WfI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766.66666666666674" y="926.78571428571422"/>
+            <point key="canvasLocation" x="772" y="927"/>
         </scene>
         <!--Adicinar novo jogo-->
         <scene sceneID="Q9W-Ji-2lk">
             <objects>
-                <viewController id="5e9-fn-pgm" sceneMemberID="viewController">
+                <viewController id="5e9-fn-pgm" customClass="AddEditViewController" customModule="MyGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="42q-cE-zhZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,10 +210,16 @@
                                 <state key="normal" title="ADICIONAR">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addEditGame:" destination="5e9-fn-pgm" eventType="touchUpInside" id="4G2-ud-5DN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afg-UB-NQX">
                                 <rect key="frame" x="16" y="356" width="382" height="381"/>
                                 <state key="normal" title="Toque para adicionar a imagem de capa"/>
+                                <connections>
+                                    <action selector="addEditCover:" destination="5e9-fn-pgm" eventType="touchUpInside" id="chx-tQ-zcO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -227,20 +253,33 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zB3-4x-6Pa"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Adicinar novo jogo" id="3zH-dd-yy5"/>
+                    <navigationItem key="navigationItem" title="Adicinar novo jogo" largeTitleDisplayMode="never" id="3zH-dd-yy5"/>
+                    <connections>
+                        <outlet property="btAddEdit" destination="5NV-M9-jQ5" id="k6j-i5-q89"/>
+                        <outlet property="btCover" destination="Afg-UB-NQX" id="p1x-lR-sUC"/>
+                        <outlet property="dpReleaseDate" destination="G9E-Hc-pXD" id="KOI-mZ-5l2"/>
+                        <outlet property="ivCover" destination="LiB-9q-1NI" id="dcD-bN-KDm"/>
+                        <outlet property="tfConsole" destination="jKs-7a-N5w" id="F9D-69-d3j"/>
+                        <outlet property="tfTitle" destination="Jxi-Zv-kto" id="0lS-lT-aXR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="skP-D8-LMB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621.7391304347827" y="926.78571428571422"/>
+            <point key="canvasLocation" x="1700" y="927"/>
         </scene>
         <!--Lista de plataformas-->
         <scene sceneID="Zsc-hn-cqm">
             <objects>
-                <tableViewController id="tee-hM-Pn8" sceneMemberID="viewController">
+                <tableViewController id="tee-hM-Pn8" customClass="ConsolesTableViewController" customModule="MyGames" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GHb-wf-7w7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="EHi-pD-cJz">
+                            <rect key="frame" x="0.0" y="99.5" width="414" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="vkB-VS-AfJ" style="IBUITableViewCellStyleDefault" id="FOS-tG-aSS">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -265,7 +304,13 @@
                             <outlet property="delegate" destination="tee-hM-Pn8" id="NU3-Y5-nOU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lista de plataformas" largeTitleDisplayMode="always" id="Z9d-RS-FkL"/>
+                    <navigationItem key="navigationItem" title="Lista de plataformas" largeTitleDisplayMode="never" id="Z9d-RS-FkL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="x8Y-sL-cL9">
+                            <connections>
+                                <action selector="addConsole:" destination="tee-hM-Pn8" id="cH8-v3-7dq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1s-Vs-yh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -280,6 +325,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="second"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="tee-hM-Pn8" kind="relationship" relationship="rootViewController" id="8SH-Q3-VfV"/>
@@ -298,6 +346,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="main"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="hgv-an-JTO" kind="relationship" relationship="rootViewController" id="gJo-3e-ipw"/>
@@ -313,6 +364,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="71N-BI-dyP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9n-Sd-ST9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -327,14 +379,17 @@
             <point key="canvasLocation" x="1861" y="-560"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="pwf-9u-vAq"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="console" width="23" height="23"/>
         <image name="game" width="23" height="23"/>
         <namedColor name="main">
-            <color red="0.0" green="0.68235294117647061" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.68199998140335083" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="second">
-            <color red="1" green="0.23529411764705882" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23499999940395355" blue="0.58399999141693115" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
